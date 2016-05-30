@@ -1,12 +1,10 @@
 clear all; close all;
 
 delay = 25:25:500;
-size(delay)
 
-vprebuf = [.158 .263 .367 .470 .571 .672 .771 .870 .968 1.06 1.16 1.26 1.35 1.45 1.54 1.63 1.73 1.82 1.91 2.00];
-size(vprebuf)
+vprebuf = [.167 .294 .417 .538 .657 .773 .887 1.00 1.11 1.22 1.33 1.43 1.54 1.65 1.75 1.85 1.95 2.05 2.15 2.25];
 
-vbuf = [.177 .277 .377 .476 .571 .672 .767 .863 .958 1.05 1.15 1.24 1.33 1.42 1.52 1.6 1.7 1.79 1.88 1.96];
+vbuf = [0.185 0.306 .426 .538 .657 .769 .880 .989 1.09 1.20 1.30 1.41 1.51 1.61 1.71 1.81 1.91 2.01 2.11 2.2];
 
 f = figure; hold all; grid on; box on;
 plot(delay, vprebuf, '-ob', 'linewidth', 2, 'markersize', 7);
@@ -17,3 +15,4 @@ title('Delay measurement device static characteristic')
 legend('Before buffer', 'After buffer C = 10pF');
 set(findall(f,'-property','FontSize'),'FontSize',17);
 set(findall(f,'-property','FontName'),'FontName', 'Helvetica');
+xlim([0 525]);
