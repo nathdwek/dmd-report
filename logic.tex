@@ -1,0 +1,38 @@
+\subsection{Derivation of a Truth Table}
+First, we notice that the system needs to have a memory.
+Indeed, after a pulse has occured, and when bot inputs are \sigval{LO}, the output \sig{charge} can still be \sigval{HI} or \sigval{LO} depending on the last pulse.
+Given the logic that needs to be implemented and the fact that there are two separate pulse inputs we choose to implement the memory using an RS-latch.
+This choice will prove to be valid at then end of this section.
+Intuitively, we choose to put \sig{start} on the \sig{set} of the latch and \sig{stop} on the \sig{reset}.
+
+Furthermore, we cannot immediately reset \sig{measure} to ground upon receiving a pulse on \sig{stop}, because this wouldn't give enough time for the output stage to properly latch the final value\footnote{In our case the output stage doesn't even have a memory so this doesn't really apply}, or more generally, wouldn't leave time for any reading device to use the measurement.
+For this reason, we choose to reset the whole device at the rising edge of a pulse on \sig{start}, and to start the measurement at the falling edge of the pulse.
+To correctly measure the delay, the measurement must then be stopped at the falling edge of the pulse on \sig{stop}.
+The output voltage is thus stabilized at its final value and available for reading from the end of the stop pulse until the beginning of the next start pulse.
+
+With that it mind, it is possible to derive a first logical function, where \sig{Q} is the output of the RS-latch:
+\[
+\sig{charge}(\sig{start}, \sig{stop}, \sig{Q}) = \sig{Q}\cdot\overline{\sig{start}} + \sig{stop}
+\]
+
+\subsection{$\nand$/$\nor$ Implementation}
+This function must be adapted based on the implementation details:
+\begin{itemize}
+  \item As will be shown in next section, \sig{charge} should be active-low because it drives a PMOS switch.
+  \item $\nand$ and $\nor$ gates are the most directly available and require less transistors than $\andg$ and $\org$ gates. $\overline{\sig{Q}}$ is directly available from the RS-latch.
+\end{itemize}
+
+Using de Morgan's law on the first term of the $\nor$ which appears when taking account that \sig{charge} should be active low, we find:
+\begin{align*}
+\overline{\sig{charge}} &= \nor(\sig{Q}\cdot\overline{\sig{start}}, \sig{stop})\\
+&=\nor(\nor(\overline{\sig{Q}}, \sig{start}), \sig{stop})
+\end{align*}
+This final expression allows to implement the required logic using only one RS-latch and two $\nor$ gates, as shown on figure~\ref{fig:blklogic}
+\begin{figure}
+  \centering
+  %\includegraphics
+  \caption{Logic circuit of \blk{logic}.\label{fig:blklogic}}
+\end{figure}
+
+\subsection{Sizing}
+The logical gates are built using minimal length transistors. The width should theoretically progressively increase from input gates to output gates so that the output gate is able to drive the parasitic input capacitance of the next block and so that every gate in the circuit is able to drive the gate at its output. However, it turns out that minimally-sized transistors are able to correctly drive \blk{rampgen}, so the whole logic circuit is made of minimally-size transistors.

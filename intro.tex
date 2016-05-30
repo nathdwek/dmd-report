@@ -14,7 +14,7 @@ To achieve this, the device is organized as shown in figure~\ref{fig:block}.
   \caption{Block diagram overview.\label{fig:block}}
 \end{figure}
 
-At the core is the block \blk{rampgen} which generates a rising ramp on its analog output \sig{measure} when the digital input \sig{charge} is \sigval{HI}, maintains its output when \sig{charge} is \sigval{LO}, and resets it to ground when the digital input \sig{start} is \sigval{HI}.
+At the core is the block \blk{rampgen} which generates a rising ramp on its analog output \sig{measure} when the digital input \sig{charge} is \sigval{LO}, maintains its output when \sig{charge} is \sigval{HI}, and resets it to ground when the digital input \sig{start} is \sigval{HI}.
 
 It is the controlled by the first block, \blk{logic}, which controls \sig{charge} based on the succession of pulses on its digital inputs \sig{start} and \sig{stop} and some internal logic.
 

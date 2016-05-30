@@ -8,6 +8,10 @@
 
 \usepackage{amsmath}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+\DeclareMathOperator{\nand}{NAND}
+\DeclareMathOperator{\nor}{NOR}
+\DeclareMathOperator{\andg}{AND}
+\DeclareMathOperator{\org}{OR}
 \usepackage{amssymb}
 
 \usepackage{mathspec}
@@ -32,11 +36,11 @@
 \newcommand{\blk}[1]{
 \fbox{\texttt{#1}}
 }
-\newcommand{\sig}[1]{
+\newcommand{\sigval}[1]{
 \texttt{\textit{#1}}
 }
-\newcommand{\sigval}[1]{
-\texttt{#1}
+\newcommand{\sig}[1]{
+\ensuremath{\mathtt{#1}}
 }
 
 \usepackage{xcolor}
