@@ -8,11 +8,6 @@
 
 \usepackage{amsmath}
 \newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
-\DeclareMathOperator{\nand}{NAND}
-\DeclareMathOperator{\nor}{NOR}
-\DeclareMathOperator{\andg}{AND}
-\DeclareMathOperator{\org}{OR}
-\DeclareMathOperator{\notg}{NOT}
 \usepackage{amssymb}
 
 \usepackage{mathspec}
@@ -42,6 +37,12 @@
 }
 \newcommand{\sig}[1]{
 \ensuremath{\mathtt{#1}}
+}
+\newcommand{\gate}[1]{
+\ensuremath{\mathtt{\uppercase{#1}}}
+}
+\newcommand{\signot}[1]{
+\ensuremath{\overline{\mathtt{#1}}}
 }
 
 \usepackage{xcolor}

@@ -12,25 +12,25 @@ For this reason, we choose to reset the whole device at the rising edge of a pul
 To correctly measure the delay, the measurement must then be stopped at the falling edge of the pulse on \sig{stop}.
 The output voltage is thus stabilized at its final value and available for reading from the end of the \sig{stop} pulse until the beginning of the next \sig{start} pulse.
 
-With that it mind, it is possible to derive a first logical function, where \sig{Q} is the output of the RS-latch:
+With that it mind, it is possible to derive a first logical function, where \sig{q} is the output of the RS-latch:
 \begin{equation}
-\sig{charge}(\sig{start}, \sig{stop}, \sig{Q}) = \sig{Q}\cdot\overline{\sig{start}} + \sig{stop}\label{eqn:1logic}
+\sig{charge}(\sig{start}, \sig{stop}, \sig{q}) = \sig{q}\cdot\signot{start} + \sig{stop}\label{eqn:1logic}
 \end{equation}
 
-\subsection{$\nand$/$\nor$ Implementation}
+\subsection{\hspace{-.3em}\gate{nand}/\gate{nor} Implementation}
 This function must be adapted based on the following implementation details:
 \begin{itemize}
   \item As will be shown in next section, \sig{charge} should be active-low because it drives a PMOS switch.
-  \item $\nand$ and $\nor$ gates are the most directly available and require less transistors than $\andg$ and $\org$ gates.
-  \item $\overline{\sig{Q}}$ is directly available from the RS-latch.
+  \item \gate{nand} and \gate{nor} gates are the most directly available and require less transistors than \gate{and} and \gate{or} gates.
+  \item $\signot{q}$ is directly available from the RS-latch.
 \end{itemize}
 
-Using de Morgan's law on the first term of the $\nor$ which appears when taking account that \sig{charge} should be active low, we find:
+Using de Morgan's law on the first term of the \gate{nor} which appears when taking account that \sig{charge} should be active low, we find:
 \begin{align*}
-\overline{\sig{charge}} &= \nor(\sig{Q}\cdot\overline{\sig{start}}, \sig{stop})\\
-&=\nor(\nor(\overline{\sig{Q}}, \sig{start}), \sig{stop})
+\signot{charge} &= \gate{nor}(\sig{q}\cdot\signot{start}, \sig{stop})\\
+&=\gate{nor}(\gate{nor}(\signot{q}, \sig{start}), \sig{stop})
 \end{align*}
-This final expression allows to implement the required logic using only one RS-latch and two $\nor$ gates (rather than for example four $\notg$, one $\nand$ and one $\nor$ gate if we simply inverted function \ref{eqn:1logic}), as shown on figure~\ref{fig:blklogic}.
+This final expression allows to implement the required logic using only one RS-latch and two \gate{nor} gates (rather than for example four \gate{not}, one \gate{nand} and one \gate{nor} gate if we simply inverted function \ref{eqn:1logic}), as shown on figure~\ref{fig:blklogic}.
 \begin{figure}
   \centering
   \includegraphics[width=\textwidth]{logicGates.png}
