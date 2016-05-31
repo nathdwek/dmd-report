@@ -10,8 +10,8 @@ The pulses themselves are chosen to be \SI{10}{\nano\second} long, and the devic
 To achieve this, the device is organized as shown in figure~\ref{fig:block}.
 \begin{figure}
   \centering
-  %\includegraphics[width=\textwidth]{block}
-  \caption{Block diagram overview.\label{fig:block}}
+  \includegraphics[width=\textwidth]{blocks.png}
+  \caption{Block diagram overview of the delay measurement device.\label{fig:block}}
 \end{figure}
 
 At the core is the block \blk{rampgen} which generates a rising ramp on its analog output \sig{measure} when the digital input \sig{charge} is \sigval{LO}, maintains its output when \sig{charge} is \sigval{HI}, and resets it to ground when the digital input \sig{start} is \sigval{HI}.
