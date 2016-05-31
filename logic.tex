@@ -1,3 +1,5 @@
+This blocks controls its output \sig{charge} based on the voltage pulses received on its inputs \sig{start} and \sig{stop}, so that the next block \blk{rampgen} can control its output \sig{measure} based only on the current value of its inputs.
+
 \subsection{Derivation of a Truth Table}
 First, we notice that the system needs to have a memory.
 Indeed, after a pulse has occured, and when both inputs are \sigval{LO}, the output \sig{charge} can still be \sigval{HI} or \sigval{LO} depending on the last pulse.
