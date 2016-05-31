@@ -1,27 +1,42 @@
+%!TEX root = main.tex
+Figure~\ref{fig:normalop}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{normalop.png}
+  \caption{Delay measurement device under normal operation.\label{fig:normalop}}
+\end{figure}
+shows the device working in normal conditions and proves that it is working as it is supposed to.
+In the next subsections, we will examine its properties more closely, starting with the most important one, its static characteristic.
 
-\subsection{Output characteristic}
-Some simulations have been made in order to make sure the circuits works as expected. First we computed the curves for a series of moving pulses as it could be in a practical case. Hereafter are the curves obtained in normal operation conditions. 
-\begin{figure}[!ht]
-\includegraphics[width=\textwidth]{normalop.pdf}
-\label{normal_op}
-\caption{Output in normal operation mode}
+\subsection{Static Characteristic}
+Figure~\ref{fig:carac}
+\begin{figure}
+  \centering
+  \includegraphics[width=\textwidth]{carac.pdf}
+  \caption{Static characteristic of the device.\label{fig:carac}}
 \end{figure}
-\\
-As we can see, the output is linear as expected and follows the different variations of the pulses.
-To get an idea of the linearity of the circuit, we computed the output characteristic taking different values of delay between the pulses and measuring the output. The delays are sweeped between 25 ns and 500 ns by step of 25 ns.
-\newpage
-\begin{figure}[!ht]
-\includegraphics[width=\textwidth]{carac.pdf}
-\label{caract}
-\caption{Delay measurement}
-\end{figure}
-As it can be noticed on the Figure\ref{caract} the output characteristic is linear. That goes along with the fact that the circuit is working good even for high delay.
-\subsection{Output range}
-In order to know the interval in which the circuit is still working as it should be, several pulses have been put each spaced of 70 ns starting at 200 ns. The stopping pulse have been put at 1 us.
-\begin{figure}[!ht]
-\includegraphics[width=\textwidth]{buffer-satu.png}
-\label{buffer_satu}
-\caption{Buffer saturating}
-\end{figure}
+shows the static characteristic of the device, before and after the output stage. The characteristic is pretty linear in both cases.
+The output stage changes the slope a little because the static error changes slightly across the output range, but the linearity is preserved, which is the most important aspect.
 
-The Figure \ref{buffer_satu} shows clearly that for pulses spaced from 670 ns and above, the output is not linear anymore as the buffer begins to saturate. The output range reached here is approximately equal to 2.4 V. 
+\subsection{Output Range}
+Figure~\ref{fig:carac} shows that the output ranges from \SI{666}{TODO} for a \SI{10}{\nano\second} delay to \SI{2.2}{\volt} for a \SI{500}{\nano\second} delays.
+Figure~\ref{fig:range}
+\begin{figure}
+  \includegraphics[width=\textwidth]{buffer-satu.png}
+  \caption[Output range limits of the device.]{Output range limits of the device. Shortest delay (light green): \SI{500}{\nano\second} delay, other tested delays are in increments of $\sim$\SI{66}{\nano\second}.\label{fig:range}}
+\end{figure}
+shows how the device behaves for longer delays.
+The output stays linear for delays slightly outside of the nominal range, but then starts to lose linearity very quickly.
+This means that the device is correctly sized from that point of view and that the near full output range is used during normal operation.
+
+\subsection{Imperfections}
+The device has two main sources of imperfections.
+First, as presented in \ref{sub:rampsize}, there is a capacitive coupling between the output of \blk{rampgen} and its digital input \sig{charge}, which means that there are small steps at the output of the device on falling edges on \sig{start} and \sig{stop}.
+
+Secondly, the device is not perfectly memoryless.
+This is because there is a capacitive path between the output of the device and \sig{vbias}, through the OTA.
+This means that the very steep falling edge which happens on every reset pulls \sig{vbias} down.
+The effect on \sig{vbias} depends on the height of the edge and influences the current that charges the capacitor to provide \sig{measurement}.
+A measurement is thus slightly influenced by the previous one: the device has some hysteresis.
+
+To avoid this, the user can consider this effect as a transient, run multiple identical measurements back to back and only keep the last one so that the output doesn't depend on the unknown state of \sig{vbias} anymore.
