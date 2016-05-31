@@ -7,7 +7,7 @@ Given the logic that needs to be implemented and the fact that there are two sep
 This choice will prove to be adequate at the end of this section.
 Intuitively, we choose to put \sig{start} on the \sig{set} of the latch and \sig{stop} on the \sig{reset}.
 
-Furthermore, we cannot immediately reset \sig{measure} to ground upon receiving a pulse on \sig{stop}, because this wouldn't give enough time for the output stage to properly latch the final value\footnote{In our case the output stage doesn't even have a memory so this doesn't really apply.}, or more generally, wouldn't leave time for any reading device to use the measurement.
+Furthermore, we cannot immediately reset \sig{measure} to ground upon receiving a pulse on \sig{stop}, because this would not give enough time for the output stage to properly latch the final value\footnote{In our case the output stage does not even have a memory so this does not really apply.}, or more generally, would not leave time for any reading device to use the measurement.
 For this reason, we choose to reset the whole device at the rising edge of a pulse on \sig{start}, and to start the measurement at the falling edge of the pulse.
 To correctly measure the delay, the measurement must then be stopped at the falling edge of the pulse on \sig{stop}.
 The output voltage is thus stabilized at its final value and available for reading from the end of the \sig{stop} pulse until the beginning of the next \sig{start} pulse.

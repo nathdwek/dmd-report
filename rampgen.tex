@@ -23,7 +23,8 @@ Figure~\ref{fig:rampgen} shows the circuit designed according to these considera
 \end{figure}
 
 \subsection{Sizing}
-\sig{M3} should be long in order to minimize its $g_{ds}$ since it acts as a current source.
+\sig{M3} is chosen long in order to minimize its $g_{ds}$ since it acts as a current source.
+It is not strongly biased in order to maximize the output range ($\sig{vbias} \simeq \SI{2.6}{\volt}$).
 Its width, in combination with the capacitance of \sig{C1} determines the slope of the output ramp.
 The slope is chosen so that the device reaches the limits of saturation for the longest required delay of \SI{500}{\nano\second}.
 The width also controls the sizing of \sig{M1} which has the same $i_{ds}$ as \sig{M3}.
@@ -42,4 +43,5 @@ Next, ${i_{ds}}_{\sig{M3}}$ is set by choosing \sig{M3}'s width so that the ramp
 Finally, we check that \sig{M1} is able to deliver this final value of $i_{ds}$.
 A minimally sized transistor is able to deliver the current required by \sig{M3} so the sizing of this part of the ciruit is finished.
 
-For \sig{M2}, we don't care about linearity so we use a minimal length transistor that is wide enough to reset \sig{measure} to ground in \SI{10}{\nano\second}, the length of a pulse, so that the output is properly initialized for the next measurement.
+\sig{M2} is a minimal length transistor since linearity is not important during the reset phase.
+It is wide enough to drive \sig{measure} from \SI{3.3}{\volt} to ground in \SI{10}{\nano\second}, the length of a pulse, so that the output is properly reset for the next measurement.
