@@ -19,11 +19,11 @@ shows the static characteristic of the device, before and after the output stage
 The output stage changes the slope a little because the static error changes slightly across the output range, but the linearity is preserved, which is the most important aspect.
 
 \subsection{Output Range}
-Figure~\ref{fig:carac} shows that the output ranges from \SI{666}{TODO} for a \SI{10}{\nano\second} delay to \SI{2.2}{\volt} for a \SI{500}{\nano\second} delays.
+Figure~\ref{fig:carac} shows that the output ranges from \SI{118}{\milli\volt} for a \SI{10}{\nano\second} delay to \SI{2.20}{\volt} for a \SI{500}{\nano\second} delays.
 Figure~\ref{fig:range}
 \begin{figure}
-  \includegraphics[width=\textwidth]{buffer-satu.png}
-  \caption[Output range limits of the device.]{Output range limits of the device. Shortest delay (light green): \SI{500}{\nano\second} delay, other tested delays are in increments of $\sim$\SI{66}{\nano\second}.\label{fig:range}}
+  \includegraphics[width=\textwidth]{range.png}
+  \caption[Output range limits of the device.]{Output range limits of the device. Shortest delay (dark green): \SI{500}{\nano\second} delay, other tested delays are in increments of \SI{50}{\nano\second}.\label{fig:range}}
 \end{figure}
 shows how the device behaves for longer delays.
 The output stays linear for delays slightly outside of the nominal range, but then starts to lose linearity very quickly.
@@ -31,11 +31,11 @@ This means that the device is correctly sized from that point of view and that t
 
 \subsection{Imperfections}
 The device has two main sources of imperfections.
-First, as presented in \ref{sub:rampsize}, there is a capacitive coupling between the output of \blk{rampgen} and its digital input \sig{charge}, which means that there are small steps at the output of the device on falling edges on \sig{start} and \sig{stop}.
+First, as presented in subsection \ref{sub:rampsize}, there is a capacitive coupling between the output of \blk{rampgen} and its digital input \sig{charge}, which means that there are small steps at the output of the device on falling edges of \sig{start} and \sig{stop}.
 
 Secondly, the device is not perfectly memoryless.
 This is because there is a capacitive path between the output of the device and \sig{vbias}, through the OTA.
-This means that the very steep falling edge which happens on every reset pulls \sig{vbias} down.
+This means that the very steep falling edge which happens on the output at every reset pulls \sig{vbias} down.
 The effect on \sig{vbias} depends on the height of the edge and influences the current that charges the capacitor to provide \sig{measurement}.
 A measurement is thus slightly influenced by the previous one: the device has some hysteresis.
 

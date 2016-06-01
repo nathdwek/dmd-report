@@ -5,13 +5,13 @@
 To generate a voltage ramp on command, we choose to charge a capacitor through a switch with a DC current source.
 
 We choose to split the switching and current generation responsibilities between two transistors.
-This allows to simulaneously achieve good switching behaviour which requires a low area transistor to reduce the gate parasitic capacitances, and good current source behaviour which requires a long transistor (and thus wide for a given $I_{ds}$ and $V_{ov}$) to reduce $g_{ds}$.
+This allows to simulaneously achieve good switching behaviour which requires a low area transistor to reduce the gate parasitic capacitances, and good current source behaviour which requires a long (and thus wide for a given $I_{ds}$ and $V_{ov}$) transistor to reduce $g_{ds}$.
 
 We choose to reference \sig{measurement} to ground so that its scales positively with the measured delay.
 This means that one of the capacitor terminals is grounded, and that the current source uses a PMOS.
 This choice is arbitrary, but will be taken into account when designing the output stage in order to maximize the output range.
 
-The ramp switching is done using a PMOS as well because it allows to put the source on the drain of the current source which has relatively stable voltage. This gives better results than using an NMOS, because in that case the voltage a the source of the switch is actually the output ramp which should cover the widest possible range of voltages.
+The ramp switching is done using a PMOS as well because it allows to put the source on the drain of the current source which has relatively stable voltage. This gives better results than using an NMOS, because in that case the voltage at the source of the switch is actually the output ramp which should cover the widest possible range of voltages.
 
 Finally, the output is shorted to ground by an NMOS switch controlled by \sig{start}. \sig{start} is thus active-high while \sig{charge} is active-low, which corresponds to what we use in the previous section.
 
